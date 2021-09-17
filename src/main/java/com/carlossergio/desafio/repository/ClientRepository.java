@@ -30,18 +30,36 @@ public class ClientRepository {
 		List<Client> listClients = new ArrayList<>(clientHashMap.values());
 		return listClients;
 	}
+	
+	public Client findById(Long id) {
+		return clientHashMap.get(id);
+	}
 
 	/// UPADATE
-	public Client update(Client client) {
-		Client clientWork = clientHashMap.get(client.getId());
-		if(clientWork == null) {
+	public Client update(Long id, Client client) {
+		Client clientOld = clientHashMap.get(id);
+		if(clientOld == null) {
 			return null;
 		}
-		clientWork.setName(client.getName().isEmpty() ? client.getName() : null);
-		clientWork.setEmail(client.getEmail().isEmpty() ? client.getEmail() : null);
-		clientWork.setPassword(client.getPassword().isEmpty() ? client.getPassword() : null);
-		clientWork.setEnabled(client.isEnabled());
-		return clientWork;
+		/*
+		clientOld.setName(!client.getName().isEmpty() ? client.getName() : clientOld.getName());
+		clientOld.setEmail(!client.getEmail().isEmpty() ? client.getEmail() : clientOld.getEmail());
+		clientOld.setPassword(!client.getPassword().isEmpty() ? client.getPassword() : clientOld.getPassword());
+		clientOld.setEnabled(client.isEnabled());
+		*/
+		if(!client.getName().isEmpty()) {
+			clientOld.setName(client.getName());
+		}
+		if(!client.getEmail().isEmpty()) {  
+			clientOld.setEmail(client.getEmail());
+		}
+		if(!client.getPassword().isEmpty()) {
+			clientOld.setPassword(client.getPassword());
+		}
+		clientOld.setEnabled(client.isEnabled());
+		
+		/// Retorna o cliente velho atualiza 
+		return clientOld;
 	}
 
 	/// DELETE

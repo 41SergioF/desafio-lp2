@@ -9,10 +9,9 @@ import com.carlossergio.desafio.repository.ClientRepository;
 
 @Service
 public class ClientService {
-	
+
 	private static ClientRepository repository = new ClientRepository();
 
-	
 	/// CREATE
 	public void insert(Client client) {
 		repository.insert(client);
@@ -21,12 +20,16 @@ public class ClientService {
 	/// READ
 	public List<Client> findAll() {
 		List<Client> list = repository.findAll();
-		return list	;
+		return list;
+	}
+
+	public Client findById(Long id) {
+		return repository.findById(id);
 	}
 
 	/// UPADATE
-	public Client update(Client client) {
-		return repository.update(client);		
+	public Client update(Long id, Client client) {
+		return repository.update(id, client);
 	}
 
 	/// DELETE
